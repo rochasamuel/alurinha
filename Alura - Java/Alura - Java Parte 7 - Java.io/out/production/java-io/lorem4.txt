@@ -1,0 +1,3 @@
+Teste de adição de texto a um arquivo .txt
+
+Aqui termina o texto adicionado
