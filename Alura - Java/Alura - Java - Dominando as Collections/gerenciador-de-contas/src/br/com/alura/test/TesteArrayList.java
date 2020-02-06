@@ -1,8 +1,9 @@
 package br.com.alura.test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class Teste {
+public class TesteArrayList {
 
     public static void main(String[] args) {
 
@@ -15,6 +16,12 @@ public class Teste {
         aulas.add(aula1);
         aulas.add(aula2);
         aulas.add(aula3);
+
+        aulas.remove(1);
+
+        aulas.add(aula2);
+
+        Collections.sort(aulas);
 
         System.out.println(aulas);
 //        aulas.forEach(aula -> System.out.println(aula));
