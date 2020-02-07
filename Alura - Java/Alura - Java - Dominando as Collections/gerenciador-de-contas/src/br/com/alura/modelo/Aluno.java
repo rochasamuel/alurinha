@@ -13,13 +13,9 @@ public class Aluno {
         this.matricula = matricula;
     }
 
-    public String getNome() {
-        return nome;
-    }
+    public String getNome() { return nome; }
 
-    public int getMatricula() {
-        return matricula;
-    }
+    public int getMatricula() { return matricula; }
 
     @Override
     public String toString() {
@@ -36,12 +32,7 @@ public class Aluno {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(nome, matricula);
-    }
+    public int hashCode() { return Objects.hash(nome, matricula); }
 
-    //sempre que dar override no metodo equal dar override també no metodo hashCode
-
-
-
+    //sempre que dar override no metodo equal dar override também no metodo hashCode
 }
