@@ -1,3 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<<c:url value="/novaEmpresa" var="linkNovaEmpresa" />
+
+
 <!DOCTYPE html>
 <html>
 
@@ -7,8 +11,9 @@
     </head>
 
     <body>
-        <form action="/gerenciador/novaEmpresa" method="POST">
+        <form action="${ linkNovaEmpresa }" method="POST">
             <label for="nome">Nome da Empresa: </label><input id="nome" type="text" name="nome">
+            <label for="data">Data: </label><input id="data" type="text" name="data">
             <input type="submit">
         </form>
     </body>
