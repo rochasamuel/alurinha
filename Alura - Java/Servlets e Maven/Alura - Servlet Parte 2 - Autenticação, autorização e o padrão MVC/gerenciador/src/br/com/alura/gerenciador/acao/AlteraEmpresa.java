@@ -12,30 +12,31 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.alura.gerenciador.modelo.Banco;
 import br.com.alura.gerenciador.modelo.Empresa;
 
-public class AlteraEmpresa {
-	
-	public void executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Alterando Empresa");
-    	
-    	String data = request.getParameter("data");
-    	String nomeEmpresa = request.getParameter("nome");
-    	String idParam = request.getParameter("id");
-    	Integer id = Integer.valueOf(idParam);
-    	
-    	Date abertura = null;
-    	
-    	try {
-    		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			abertura = sdf.parse(data);
+public class AlteraEmpresa  implements Acao{
+
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String nomeEmpresa = request.getParameter("nome");
+		String paramDataEmpresa = request.getParameter("data");
+		String paramId = request.getParameter("id");
+		Integer id = Integer.valueOf(paramId);
+		
+		System.out.println("acao altera empresa " + id);
+		
+		Date dataAbertura = null;
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			dataAbertura = sdf.parse(paramDataEmpresa);
 		} catch (ParseException e) {
 			throw new ServletException(e);
 		}
-    	
-    	Banco banco = new Banco();
-    	Empresa empresa = banco.buscaEmpresaPeloId(id);
-    	empresa.setNome(nomeEmpresa);
-    	empresa.setDataAbertura(abertura);
-    	
-    	response.sendRedirect("entrada?acao=ListaEmpresas");
+		
+		Banco banco = new Banco();
+		Empresa empresa = banco.buscaEmpresaPelaId(id);
+		empresa.setNome(nomeEmpresa);
+		empresa.setDataAbertura(dataAbertura);
+		
+		return "redirect:entrada?acao=ListaEmpresas";
+	
 	}
 }

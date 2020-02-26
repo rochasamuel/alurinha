@@ -6,23 +6,43 @@ import java.util.List;
 
 public class Banco {
 	
-	private static List<Empresa> empresas = new ArrayList<>();
+	private static List<Empresa> lista = new ArrayList<>();
+	private static List<Usuario> listaUsuarios = new ArrayList<>();
 	private static Integer chaveSequencial = 1;
 	
 	static {
-		Empresa e1 = new Empresa();
-		e1.setId(chaveSequencial++);
-		e1.setNome("Alura");
-		Empresa e2 = new Empresa();
-		e2.setId(chaveSequencial++);
-		e2.setNome("Caelum");
-		empresas.add(e1);
-		empresas.add(e2);
+		Empresa empresa = new Empresa();
+		empresa.setId(chaveSequencial++);
+		empresa.setNome("Alura");
+		Empresa empresa2 = new Empresa();
+		empresa2.setId(chaveSequencial++);
+		empresa2.setNome("Caelum");
+		lista.add(empresa);
+		lista.add(empresa2);
+		
+		Usuario u1 = new Usuario();
+		u1.setLogin("nico");
+		u1.setSenha("12345");
+		Usuario u2 = new Usuario();
+		u2.setLogin("ana");
+		u2.setSenha("12345");
+		
+		listaUsuarios.add(u1);
+		listaUsuarios.add(u2);
+	}
+
+	public void adiciona(Empresa empresa) {
+		empresa.setId(Banco.chaveSequencial++);
+		Banco.lista.add(empresa);
+	}
+	
+	public List<Empresa> getEmpresas(){
+		return Banco.lista;
 	}
 
 	public void removeEmpresa(Integer id) {
 		
-		Iterator<Empresa> it = empresas.iterator();
+		Iterator<Empresa> it = lista.iterator();
 		
 		while(it.hasNext()) {
 			Empresa emp = it.next();
@@ -32,22 +52,23 @@ public class Banco {
 			}
 		}
 	}
-	
-	public void adiciona(Empresa e) {
-		e.setId(Banco.chaveSequencial++);
-		Banco.empresas.add(e);
-	}
-	
-	public static List<Empresa> getEmpresas() {
-		return Banco.empresas;
-	}
 
-	public Empresa buscaEmpresaPeloId(Integer id) {
-		for (Empresa empresa : empresas) {
+	public Empresa buscaEmpresaPelaId(Integer id) {
+		for (Empresa empresa : lista) {
 			if(empresa.getId() == id) {
 				return empresa;
 			}
 		}
 		return null;
 	}
+
+	public Usuario existeUsuario(String login, String senha) {
+		for(Usuario usuario : listaUsuarios) {
+			if(usuario.ehIgual(login, senha)) {
+				return usuario;
+			}
+		}
+		return null;
+	}
+
 }
