@@ -30,6 +30,28 @@ class NegociacaoController {
         this._limparFormulario();
     }
 
+    importaNegociacoes(event) {
+        /*AJAX*/
+        event.preventDefault();
+
+        //cria uma instanciia do serviço de ajax
+        let service = new NegociacaoService();
+
+        //padrao de projeto promise
+        Promise.all([
+            service.obterNegociacoesDaSemana(),
+            service.obterNegociacoesDaSemanaAnterior(),
+            service.obterNegociacoesDaSemanaRetrasada()
+        ])
+        .then(negociacoes => {
+            negociacoes
+            .reduce((arrayAchatado, array) => arrayAchatado.concat(array), [])
+            .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+            this._mensagem.texto = 'Negociações importadas com sucesso!'
+        })
+        .catch(error => this._mensagem.texto = error);
+    }
+
     apaga(event) { 
         event.preventDefault();
 
